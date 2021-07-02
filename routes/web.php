@@ -32,15 +32,20 @@ Route::get('/', function () {
 //Route::get('/hello/other', [HelloController::class, 'other']);
 
 
-Route::get('/hello/{person}', [HelloController::class, 'index']);
+Route::get('/hello', [HelloController::class, 'index'])->name('hello');
+Route::get('/hello/{msg}', [HelloController::class, 'other']);
+Route::get('/sample', [SampleController::class, 'index'])->name('sample');
+
+//Route::get('/hello/{person}', [HelloController::class, 'index']);
 /*
 Route::middleware([HelloMiddleware::class])->group(function(){
     Route::get('/hello', [HelloController::class, 'index']);
     Route::get('/hello/other', [HelloController::class, 'other']);
 });
 */
-
+/*
 Route::namespace('sample')->group(function(){
     Route::get('/sample', [SampleController::class, 'index']);
     Route::get('/sample/other', [SampleController::class, 'other']);
 });
+*/

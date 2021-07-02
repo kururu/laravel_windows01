@@ -6,6 +6,6 @@
     </head>
     <body>
         <h1>Hello/Index</h1>
-        <p>{{$msg}}</p>
+        <p>{!!$msg!!}</p>
     </body>
 </html>
