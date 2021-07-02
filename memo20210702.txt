@@ -1,0 +1,14 @@
+Hello
+
+use App\Http\Controllers\HelloController;
+Route::get('/hello', [HelloController::class, 'index']);
+
+https://laravel.com/docs/8.x/routing
+#Named Routes
+Route::get('/hello', [HelloController::class, 'index'])->name('hello');
+#Regular Expression Constraints
+Route::get('/hello/{id}', [HelloController::class, 'index'])->where('id','[0-9]+');
+
+
+php artisan vendor:publish --tag=laravel-errors
+php artisan make:middleware HelloMiddleware
