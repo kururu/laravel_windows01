@@ -1,20 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Person;
 use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
-    public function index($id = 1)
+    public function index(Person $person)
     {
         $data = [
-            'msg' => 'id = '. $id,
+            'msg' => $person,
         ];
         return view('hello.index',$data);
     }
-
-    public function other(){
-        return redirect()->route('hello');
+/*
+    public function other(Request $request){
+        $data = [
+            'msg' => $request->bye,
+        ];
+        return view('hello.index',$data);
     }
+*/
 }

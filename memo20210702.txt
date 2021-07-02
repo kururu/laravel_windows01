@@ -12,3 +12,15 @@ Route::get('/hello/{id}', [HelloController::class, 'index'])->where('id','[0-9]+
 
 php artisan vendor:publish --tag=laravel-errors
 php artisan make:middleware HelloMiddleware
+
+
+CREATE TABLE people (
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+name TEXT NOT NULL,
+mail TEXT,
+age INTEGER);
+
+insert into people values (1, 'taro', 'taro@yamada', '34');
+insert into people values (2, 'jiro', 'jiro@yamada', '36');
+
+select * from people;
