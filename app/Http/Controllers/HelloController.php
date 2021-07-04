@@ -15,7 +15,6 @@ class HelloController extends Controller
     {
         //$sample_msg = $this->fname;
         $url = Storage::disk('public')->url($this->fname);
-        $url = storage_path()."\app\public\\".$this->fname;
         $size = Storage::disk('public')->size($this->fname);
         $modified = Storage::disk('public')->lastModified($this->fname);
         $modified_time = date('y-m-d H:i:s',$modified);
