@@ -16,7 +16,7 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ol>
         <hr>
-        <?php echo $data->links(); ?>
+        <?php echo $paginator->link(); ?>
 
     </body>
 

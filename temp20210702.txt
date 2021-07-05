@@ -1362,3 +1362,69 @@ use App\Person;
         ];
         return view('hello.index', $data);
     }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Pagenation
+
+<?php
+namespace App\Http\Pagination;
+
+
+use Illuminate\Contracts\Pagination\Paginator;
+MyPagenator.php
+
+class MyPaginator
+{
+    private $paginator;
+
+
+    public function __construct(Paginator $paginator)
+    {
+        $this->paginator = $paginator;
+    }
+
+
+    public function link()
+    {
+        $prev = $this->paginator->currentPage() == 1 ?
+            ' disabled' : '';
+        $next = $this->paginator->currentPage() == 
+            $this->paginator->count() ? ' disabled' : '';
+        $result = '<ul class="pagination" role="navigation">';
+        $result .= '<li class="page-item' . $prev . 
+            '"><a class="page-link" href="' . 
+            $this->paginator->previousPageUrl() . 
+            '">←前のページ</a></li>';
+        $result .= '<li class="page-item disabled">' .
+            '<a class="page-link">'. 
+            $this->paginator->currentPage() . '</a></li>';
+        $result .= '<li class="page-item' . $next . 
+            '"><a class="page-link" href="' . 
+            $this->paginator->nextPageUrl() . 
+            '">次のページ→</a></li>';
+        $result .= '</ul>';
+        return $result;
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+use App\Person;
+use App\Http\Pagination\MyPaginator;
+
+    public function index(Request $request)
+    {
+        $id = $request->query('page');
+        $msg = 'show page: ' . $id;
+        $result = Person::paginate(3);
+        $paginator = new MyPaginator($result);
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+            'paginator' => $paginator,
+        ];
+        return view('hello.index', $data);
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+{!! $paginator->link() !!}
