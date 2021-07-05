@@ -654,3 +654,87 @@ class MyService
         $this->serial = rand();
         echo "「" . $this->serial . "」";
     }
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\MyClasses
+<?php
+namespace App\MyClasses;
+
+
+interface MyServiceInterface
+{
+    public function setId(int $id);
+    public function say();
+    public function allData();
+    public function data(int $id);
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.php
+
+    public function boot()
+    {
+        //
+        app()->bind('App\MyClasses\MyServiceInterface',
+        'App\MyClasses\MyService');
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\MyClasses
+MyService.php
+<?php
+namespace App\MyClasses;
+
+class MyService implements MyServiceInterface{
+    private $serial;
+    private $id = -1;
+    private $msg = 'no id...';
+    private $data = ['Hello', 'Welcome', 'Bye'];
+
+
+    function __construct()
+    {
+        $this->serial = rand();
+        echo "「" . $this->serial . "」";
+    }
+
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        if ($id >= 0 && $id < count($this->data))
+        {
+            $this->msg = "select  id:" . $id
+                . ', data:"' . $this->data[$id] . '"';
+        }
+    }
+
+
+    public function say()
+    {
+        return $this->msg;
+    }
+
+
+    public function data(int $id)
+    {
+        return $this->data[$id];
+    }
+
+
+    public function alldata()
+    {
+        return $this->data;
+    }
+    
+}
+
+MyServiceInterface.php
+<?php
+namespace App\MyClasses;
+
+interface MyServiceInterface
+{
+    public function setId(int $id);
+    public function say();
+    public function allData();
+    public function data(int $id);
+}
