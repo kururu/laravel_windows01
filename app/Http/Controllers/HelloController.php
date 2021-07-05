@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Person;
+use App\Person;
 use App\Http\Pagination\MyPaginator;
 
 class HelloController extends Controller

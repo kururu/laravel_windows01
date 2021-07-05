@@ -1442,6 +1442,9 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         return view('hello.index', $data);
     }
 
+use App\Models\Person;
+use App\Person;
+
 C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
 index.blade.php
 
