@@ -8,20 +8,26 @@ class HelloController extends Controller
 {
 
 
-    public function index()
+    public function index($id)
     {
         $data = ['msg' => '', 'data' => []];
         $msg = 'get: ';
         $result = [];
-        DB::table('people')->orderBy('age', 'asc')
-            ->chunk(2, function($items) use (&$msg, &$result)
+        $count = 0;
+        DB::table('people')
+            ->chunkById(3, function($items) 
+                use (&$msg, &$result, &$id, &$count)
         {
-            foreach($items as $item)
-            {   
-                $msg .= $item->id . ':' . $item->name . ' ';
-                $result += array_merge($result, [$item]);
-                break;
+            if ($count == $id)
+            {
+                foreach($items as $item)
+                {   
+                    $msg .= $item->id . ':' . $item->name . ' ';
+                    $result += array_merge($result, [$item]);
+                }
+                return false;
             }
+            $count++;
             return true;
         });
         $data = [
@@ -30,6 +36,7 @@ class HelloController extends Controller
         ];
         return view('hello.index', $data);
     }
+
 
 
 
