@@ -644,3 +644,13 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.ph
         $myservice->setId(0);
         return $myservice;
     });
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\MyClasses
+class MyService
+    function __construct(int $id)
+    {
+        $this->setId($id);
+        $this->serial = rand();
+        echo "「" . $this->serial . "」";
+    }
