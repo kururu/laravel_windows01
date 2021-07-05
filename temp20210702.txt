@@ -1227,3 +1227,19 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+    public function index($id)
+    {
+        $ids = explode(',', $id);
+        $msg = 'get people.';
+        $result = DB::table('people')
+            ->whereBetween('id', $ids)
+            ->get();
+
+
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
