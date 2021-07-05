@@ -135,13 +135,15 @@ hello/index.blade.php
         <meta charset="utf-8">
         <title>Index</title>
     </head>
-    <h1>Hello/Index</h1>
-    <p>{!!$msg!!}</p>
-    <form action="/hello" method="post">
-        @csrf
-        <input type="text" name="msg">
-        <input type="submit">
-    </form>
+    <body>
+    	<h1>Hello/Index</h1>
+    	<p>{!!$msg!!}</p>
+    	<form action="/hello" method="post">
+        	@csrf
+        	<input type="text" name="msg">
+        	<input type="submit">
+    	</form>
+    </body>
 </html>
 
 
@@ -169,3 +171,51 @@ class HelloController extends Controller
         return view('hello.index', $data);
     }
 }
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+public function index(Request $request)
+    {
+        $msg = 'please input text:';
+        $keys = [];
+        $values = [];
+        if ($request->isMethod('post'))
+        {
+            $form = $request->all();
+            $keys = array_keys($form);
+            $values = array_values($form);
+        }
+        $data = [
+            'msg'=> $msg,
+            'keys' => $keys,
+            'values' => $values,
+        ];
+        return view('hello.index', $data);
+    }
+
+hello/index.blade.php
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+    </head>
+    <body>
+        <h1>Hello/Index</h1>
+        <p>{!!$msg!!}</p>
+        <form action="/hello" method="post">
+            @csrf
+            <div>NAME:<input type="text" name="name"></div>
+            <div>MAIL:<input type="text" name="mail"></div>
+            <div>TEL: <input type="text" name="tel"></div>
+            <input type="submit">
+        </form>
+        <hr>
+        <ol>
+        @for($i = 0;$i < count($keys);$i++)
+            <li>{{$keys[$i]}}：{{$values[$i]}}</li>
+        @endfor
+        </ol>
+    </body>
+</html>
