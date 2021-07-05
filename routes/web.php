@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\HelloController;
 use App\Http\Middleware\HelloMiddleware;
-
+use App\Http\Middleware\MyMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +26,5 @@ Route::get('/', function () {
 
 //Route::get('hello', [HelloController::class, 'index'])->name('hello');
 
-Route::get('hello/{id}', [HelloController::class, 'index']);
-Route::get('hello', [HelloController::class, 'index']);
+Route::get('hello/{id}', [HelloController::class, 'index'])->middleware(App\Http\Middleware\MyMiddleware::class);
+Route::get('hello', [HelloController::class, 'index'])->middleware(App\Http\Middleware\MyMiddleware::class);
