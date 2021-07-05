@@ -1136,3 +1136,18 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+    public function index()
+    {
+        $name = DB::table('people')->pluck('name');
+        $value = $name->toArray();
+        $msg = implode(', ', $value); 
+        $result = DB::table('people')->get();
+
+
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
