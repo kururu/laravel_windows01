@@ -1259,3 +1259,22 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+        $result = DB::table('people')
+            ->orwhereNotNull('id' ,$ids)
+            ->get();
+
+    public function index($id)
+    {
+        $msg = 'show page: ' . $id;
+        $result = DB::table('people')
+            ->paginate(3, ['*'], 'page', $id);
+
+
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
