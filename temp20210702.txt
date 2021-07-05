@@ -1347,3 +1347,18 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+use App\Person;
+    public function index(Request $request)
+    {
+        $id = $request->query('page');
+        $msg = 'show page: ' . $id;
+        $result = Person::paginate(3);
+
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
