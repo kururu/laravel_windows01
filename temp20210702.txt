@@ -839,3 +839,33 @@ use App\MyClasses\PowerMyService;
             'App\MyClasses\PowerMyService');
 
     }
+
+php artisan make:provider MyServiceProvider
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers
+MyServiceProvider.php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class MyServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        app()->singleton('App\MyClasses\MyServiceInterface',
+            'App\MyClasses\PowerMyService');
+        echo "<b>＜MyServiceProvider/register＞</b><br>";
+    }
+
+
+    public function boot()
+    {
+        echo "<b>＜MyServiceProvider/boot＞</b><br>";
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\config
+app.php
+App\Providers\MyServiceProvider::class,
