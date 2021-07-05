@@ -1428,3 +1428,35 @@ use App\Http\Pagination\MyPaginator;
 C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
 index.blade.php
 {!! $paginator->link() !!}
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+    public function index(Request $request)
+    {
+        $msg = 'show people record.';
+        $result = Person::get();
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+
+    <body>
+        <h1>Hello/Index</h1>
+        <p>{{$msg}}</p>
+        <table class="table table-striped">
+        @foreach($data as $item)
+        <tr>
+            <th>{{$item->id}}</th>
+            <td>{{$item->name}}</td>
+            <td>{{$item->mail}}</td> 
+            <td>{{$item->age}}</td>
+        </tr>
+        @endforeach
+        </table>
+        <hr>
+    </body>
