@@ -1463,3 +1463,10 @@ index.blade.php
         </table>
         <hr>
     </body>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+        $result = Person::get()->reject(function($person)
+        {
+            return $person->age < 30;
+        });
