@@ -376,3 +376,44 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
 Route::get('hello', [HelloController::class, 'index'])->name('hello');
 Route::post('hello', [HelloController::class, 'index']);
 Route::get('hello/other', [HelloController::class, 'other']);
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\MyClasses
+<?php
+namespace App\MyClasses;
+
+
+class MyService
+{
+    private $msg;
+    private $data;
+
+
+    public function __construct()
+    {
+        $this->msg = 'Hello! This is MyService!';
+        $this->data = ['Hello', 'Welcome', 'Bye'];
+    }
+
+
+    public function say()
+    {
+        return $this->msg;
+    }
+
+
+    public function data()
+    {
+        return $this->data;
+    }
+}
+
+hello/index.blade.php
+    <body>
+        <h1>Hello/Index</h1>
+        <p>{!!$msg!!}</p>
+        <ul>
+        @foreach($data as $item)
+        <li>{!!$item!!}</li>
+        @endforeach
+        </ul>
+    </body>
