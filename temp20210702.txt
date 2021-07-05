@@ -485,3 +485,80 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\MyClasses
+
+<?php
+namespace App\MyClasses;
+
+class MyService
+{
+    
+    private $id = -1;
+    private $msg = 'no id...';
+    private $data = ['Hello', 'Welcome', 'Bye'];
+
+
+    public function __construct()
+    {
+    }
+
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        if ($id >= 0 && $id < count($this->data))
+        {
+            $this->msg = "select  id:" . $id
+                . ', data:"' . $this->data[$id] . '"';
+        }
+    }
+
+
+    public function say()
+    {
+        return $this->msg;
+    }
+
+
+    public function data(int $id)
+    {
+        return $this->data[$id];
+    }
+
+
+    public function alldata()
+    {
+        return $this->data;
+    }
+}
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.php
+use App\MyClasses\MyService;    
+public function boot()
+    {
+        //
+        app()->bind('App\MyClasses\MyService', 
+                function ($app) {
+            $myservice = new MyService();
+            $myservice->setId(0);
+            return $myservice;
+        });
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
+Route::get('hello/{id}', [HelloController::class, 'index']);
+Route::get('hello', [HelloController::class, 'index']);
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(MyService $myservice, int $id = -1)
+    {
+        $myservice->setId($id);
+        $data = [
+            'msg'=> $myservice->say($id),
+            'data'=> $myservice->alldata()
+        ];
+        return view('hello.index', $data);
+    }
