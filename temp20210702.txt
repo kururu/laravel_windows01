@@ -869,3 +869,66 @@ class MyServiceProvider extends ServiceProvider
 C:\xampp\htdocs\lara01_git\laravel_windows01\config
 app.php
 App\Providers\MyServiceProvider::class,
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+class HelloController extends Controller
+{
+
+
+    public function index(MyServiceInterface $myservice, int $id = -1)
+    {
+        $myservice->setId($id);
+        $data = [
+            'msg'=> $myservice->say(),
+            'data'=> $myservice->alldata()
+        ];
+        return view('hello.index', $data);
+    }
+    
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Facades
+MyService.php
+<?php
+namespace App\Facades;
+
+
+use Illuminate\Support\Facades\Facade;
+
+
+class MyService extends Facade {
+
+
+    protected static function getFacadeAccessor() {
+        return 'myservice';
+    }
+    
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\config
+app.php
+'myservice' => App\Facades\MyService::class,
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers
+MyServiceProvider.php
+    public function register()
+    {
+        app()->singleton('myservice',
+            'App\MyClasses\PowerMyService');
+        app()->singleton('App\MyClasses\MyServiceInterface',
+            'App\MyClasses\PowerMyService');
+        echo "<b>＜MyServiceProvider/register＞</b><br>";
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.php
+
+
+    public function boot()
+    {
+        //
+
+        app()->singleton('myservice',
+            'App\MyClasses\PowerMyService');
+
+    }

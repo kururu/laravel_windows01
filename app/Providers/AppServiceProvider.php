@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
 
-        app()->singleton('App\MyClasses\MyServiceInterface',
+        app()->singleton('myservice',
             'App\MyClasses\PowerMyService');
 
     }
