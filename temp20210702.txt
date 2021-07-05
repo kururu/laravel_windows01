@@ -932,3 +932,6 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.ph
             'App\MyClasses\PowerMyService');
 
     }
+
+
+php artisan make:middleware MyMiddleware
