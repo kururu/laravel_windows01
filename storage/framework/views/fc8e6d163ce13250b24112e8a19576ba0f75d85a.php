@@ -6,12 +6,14 @@
     </head>
     <body>
         <h1>Hello/Index</h1>
-        <p><?php echo $msg; ?></p>
-        <ul>
+        <p><?php echo e($msg); ?></p>
+        <ol>
         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <li><?php echo $item; ?></li>
+        <li><?php echo e($item->name); ?> [<?php echo e($item->mail); ?>, 
+            <?php echo e($item->age); ?>]</li>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </ul>
+        </ol>
+        <hr>
     </body>
 
 </html><?php /**PATH C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views/hello/index.blade.php ENDPATH**/ ?>

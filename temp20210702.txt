@@ -1017,3 +1017,46 @@ class HelloController extends Controller
     }
 
 }
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+<body>
+    <h1>Hello/Index</h1>
+    <p>{{$msg}}</p>
+    <ol>
+    @foreach($data as $item)
+    <li>{{$item->name}} [{{$item->mail}}, 
+        {{$item->age}}]</li>
+    @endforeach
+    </ol>
+    <hr>
+</body>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class HelloController extends Controller
+{
+
+
+    public function index()
+    {
+        $result = DB::table('people')->get();
+        $data = [
+            'msg' => 'Database access.',
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
+
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
+Route::get('hello', [HelloController::class, 'index']);
+Route::get('hello/{id}', [HelloController::class, 'index']);
