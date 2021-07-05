@@ -983,3 +983,37 @@ class HelloController extends Controller
     }
     
 }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http
+Kernel.php
+
+        'MyMW' => [
+            \App\Http\Middleware\HelloMiddleware::class,
+            \App\Http\Middleware\MyMiddleware::class,
+        ],
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
+Route::get('hello/{id}', [HelloController::class, 'index'])->middleware('MyMW');
+Route::get('hello', [HelloController::class, 'index'])->middleware('MyMW');
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+
+class HelloController extends Controller
+{
+
+
+    public function index(Request $request)
+    {
+        $data = [
+            'msg'=> $request->hello,
+            'data'=> $request->alldata,
+        ];
+        return view('hello.index', $data);
+    }
+
+}
