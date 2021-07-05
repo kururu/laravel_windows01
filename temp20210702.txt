@@ -125,4 +125,47 @@ hello/index.blade.php
     }
 
 	$all = Storage::disk('logs')->allfiles($dir);
+	$all = Storage::disk('win')->allfiles($dir);
+	$all = Storage::disk('ftp')->allfiles($dir);
 
+hello/index.blade.php
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+    </head>
+    <h1>Hello/Index</h1>
+    <p>{!!$msg!!}</p>
+    <form action="/hello" method="post">
+        @csrf
+        <input type="text" name="msg">
+        <input type="submit">
+    </form>
+</html>
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+<?php
+
+namespace App\Http\Controllers;
+use App\Person;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+class HelloController extends Controller
+{
+    public function index(Request $request)
+    {
+        $msg = 'please input text:';
+        if ($request->isMethod('post'))
+        {
+            $msg = 'you typed: "' . $request->input('msg') . '"';
+        }
+        $data = [
+            'msg'=> $msg,
+        ];
+        return view('hello.index', $data);
+    }
+}

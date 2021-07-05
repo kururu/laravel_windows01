@@ -22,32 +22,7 @@ use App\Http\Middleware\HelloMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
-    //return 'Hello World';
 });
 
-//Route::get('/sample', [SampleController::class, 'showPage']);
-//Route::get('/hello', 'HelloController@index');
-//Route::get('/hello', [HelloController::class, 'index'])->name('hello');
-//Route::get('/hello/{id}', [HelloController::class, 'index'])->where('id','[0-9]+');
-//Route::get('/hello/other', [HelloController::class, 'other']);
-
-
-Route::get('/hello', [HelloController::class, 'index'])->name('hello');
-Route::get('/hello/{msg}', [HelloController::class, 'other']);
-Route::get('/sample', [SampleController::class, 'index'])->name('sample');
-
-Route::post('hello/other', [HelloController::class, 'other']);
-
-//Route::get('/hello/{person}', [HelloController::class, 'index']);
-/*
-Route::middleware([HelloMiddleware::class])->group(function(){
-    Route::get('/hello', [HelloController::class, 'index']);
-    Route::get('/hello/other', [HelloController::class, 'other']);
-});
-*/
-/*
-Route::namespace('sample')->group(function(){
-    Route::get('/sample', [SampleController::class, 'index']);
-    Route::get('/sample/other', [SampleController::class, 'other']);
-});
-*/
+Route::get('hello', [HelloController::class, 'index']);
+Route::post('hello', [HelloController::class, 'index']);
