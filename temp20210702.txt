@@ -1332,3 +1332,18 @@ npm run dev
 https://qiita.com/n-oota/items/25601d0ab268461e66ac
 Laravel5.5 Bootstrap4のSassを使ってみる
 
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(Request $request)
+    {
+        $id = $request->query('page');
+        $msg = 'show page: ' . $id;
+        $result = DB::table('people')->simplePaginate(3);
+
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
