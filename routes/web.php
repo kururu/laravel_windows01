@@ -36,6 +36,8 @@ Route::get('/hello', [HelloController::class, 'index'])->name('hello');
 Route::get('/hello/{msg}', [HelloController::class, 'other']);
 Route::get('/sample', [SampleController::class, 'index'])->name('sample');
 
+Route::post('hello/other', [HelloController::class, 'other']);
+
 //Route::get('/hello/{person}', [HelloController::class, 'index']);
 /*
 Route::middleware([HelloMiddleware::class])->group(function(){

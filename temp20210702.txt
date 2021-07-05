@@ -89,3 +89,24 @@ class HelloController extends Controller
 hello/index.blade.php
 	<p><a href="/hello/other">download</a></p>
 
+
+        <form action="/hello/other" method="post" 
+            enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="file">
+            <input type="submit">
+        </form>
+
+
+    public function other(Request $request){
+        Storage::disk('local')->
+        putFile('files', $request->file('file'));
+        return redirect()->route('hello');
+    }
+
+    public function other(Request $request){
+        $ext = '.'.$request->file('file')->extension();
+        Storage::disk('public')->
+        putFileAs('files', $request->file('file'),'uploaded'.$ext);
+        return redirect()->route('hello');
+    }
