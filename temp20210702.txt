@@ -738,3 +738,13 @@ interface MyServiceInterface
     public function allData();
     public function data(int $id);
 }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.php
+use App\MyClasses\MyService;
+use App\MyClasses\MyServiceInterface; 
+
+    public function boot()
+    {
+        //
+        app()->bind('App\MyClasses\MyServiceInterface','App\MyClasses\MyService');
+    }
