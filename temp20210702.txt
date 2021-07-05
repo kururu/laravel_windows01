@@ -304,3 +304,36 @@ public function index(Request $request, Response $response)
         $request->flash();
         return view('hello.index', $data);
     }
+
+hello/index.blade.php
+        <form action="/hello" method="post">
+            @csrf
+            <div>NAME:<input type="text" name="name" value="{{old('name')}}"></div>
+            <div>MAIL:<input type="text" name="mail" value="{{old('mail')}}"></div>
+            <div>TEL: <input type="text" name="tel" value="{{old('tel')}}"></div>
+            <input type="submit">
+        </form>
+
+
+<form action="/hello" method="get">
+
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(Request $request, Response $response)
+    {
+        $name = $request->query('name');
+        $mail = $request->query('mail');
+        $tel = $request->query('tel');
+        $msg = $name . ', ' . $mail . ', ' . $tel;
+        $keys = ['名前','メール','電話'];
+        $values = [$name, $mail, $tel];
+        $data = [
+            'msg'=> $msg,
+            'keys'=>$keys,
+            'values'=>$values,
+        ];
+        $request->flash();
+        return view('hello.index', $data);
+    }
