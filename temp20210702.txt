@@ -1278,3 +1278,57 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+    public function index(Request $request)
+    {
+        $id = $request->query('page');
+        $msg = 'show page: ' . $id;
+        $result = DB::table('people')
+            ->paginate(3, ['*'], 'page', $id);
+
+
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\bootstrap
+app.php
+Illuminate\Pagination\AbstractPaginator::defaultView("pagination::bootstrap-4");
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link href="/css/app.css"  rel="stylesheet">
+    </head>
+    <body>
+        <h1>Hello/Index</h1>
+        <p>{{$msg}}</p>
+        <ol>
+        @foreach($data as $item)
+        <li>{{$item->name}} [{{$item->mail}}, 
+            {{$item->age}}]</li>
+        @endforeach
+        </ol>
+        <hr>
+        {!! $data->links() !!}
+    </body>
+
+</html>
+
+composer require laravel/ui
+php artisan ui bootstrap
+npm install
+php artisan ui bootstrap --auth
+npm run dev
+
+https://qiita.com/n-oota/items/25601d0ab268461e66ac
+Laravel5.5 Bootstrap4のSassを使ってみる
+

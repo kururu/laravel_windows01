@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Index</title>
+        <link href="/css/app.css"  rel="stylesheet">
+
     </head>
     <body>
         <h1>Hello/Index</h1>
@@ -14,6 +16,8 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ol>
         <hr>
+        <?php echo $data->links(); ?>
+
     </body>
 
 </html><?php /**PATH C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views/hello/index.blade.php ENDPATH**/ ?>

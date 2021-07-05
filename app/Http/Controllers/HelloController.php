@@ -8,8 +8,9 @@ class HelloController extends Controller
 {
 
 
-    public function index($id)
+    public function index(Request $request)
     {
+        $id = $request->query('page');
         $msg = 'show page: ' . $id;
         $result = DB::table('people')
             ->paginate(3, ['*'], 'page', $id);
@@ -21,6 +22,7 @@ class HelloController extends Controller
         ];
         return view('hello.index', $data);
     }
+
 
 
 }

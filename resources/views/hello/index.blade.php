@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Index</title>
+        <link href="/css/app.css"  rel="stylesheet">
+
     </head>
     <body>
         <h1>Hello/Index</h1>
@@ -14,6 +16,7 @@
         @endforeach
         </ol>
         <hr>
+        {!! $data->links() !!}
     </body>
 
 </html>

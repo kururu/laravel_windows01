@@ -28,3 +28,6 @@ Route::get('hello', [HelloController::class, 'index']);
 Route::get('hello/{id}', [HelloController::class, 'index']);
 //Route::get('hello/{id}', [HelloController::class, 'index'])->middleware('MyMW');
 //Route::get('hello', [HelloController::class, 'index'])->middleware('MyMW');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
