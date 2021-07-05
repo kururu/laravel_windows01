@@ -1060,3 +1060,25 @@ class HelloController extends Controller
 C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
 Route::get('hello', [HelloController::class, 'index']);
 Route::get('hello/{id}', [HelloController::class, 'index']);
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index($id = -1)
+    {
+        if ($id >= 0)
+        {
+            $msg = 'get ID <= ' . $id;
+            $result = DB::table('people')
+                ->where('id','<=', $id)->get();
+        }
+        else
+        {
+            $msg = 'get people records.';
+            $result = DB::table('people')->get();
+        }
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
