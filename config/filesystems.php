@@ -53,6 +53,23 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'logs' => [
+            'driver' => 'local',
+            'root' => storage_path('logs'),
+            'url' => env('APP_URL') . '/storage/logs',
+        ],
+
+        'win' => [
+            'driver' => 'local',
+            'root' => 'C:\\Users\\Owner\\Downloads',
+        ],
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => '127.0.0.1',
+            'username' => 'kururu',
+            'password' => 'kururu',
+        ],
+
     ],
 
     /*

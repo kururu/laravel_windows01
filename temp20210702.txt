@@ -110,3 +110,19 @@ hello/index.blade.php
         putFileAs('files', $request->file('file'),'uploaded'.$ext);
         return redirect()->route('hello');
     }
+
+
+    public function index()
+    {
+        $dir = '/';
+        $all = Storage::disk('local')->allfiles($dir);
+        
+        $data = [
+            'msg'=> 'DIR: ' . $dir,
+            'data'=> $all
+        ];
+        return view('hello.index', $data);
+    }
+
+	$all = Storage::disk('logs')->allfiles($dir);
+
