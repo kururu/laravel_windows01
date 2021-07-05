@@ -429,3 +429,7 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+$myservice = app()->make('App\MyClasses\MyService'); // ☆
+$myservice = resolve('App\MyClasses\MyService'); // ☆
