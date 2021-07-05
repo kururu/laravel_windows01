@@ -433,3 +433,55 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
 
 $myservice = app()->make('App\MyClasses\MyService'); // ☆
 $myservice = resolve('App\MyClasses\MyService'); // ☆
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\MyClasses
+<?php
+namespace App\MyClasses;
+
+class MyService
+{
+    private $id = -1;
+    private $msg = 'no id...';
+    private $data = ['Hello', 'Welcome', 'Bye'];
+
+
+    public function __construct(int $id = -1)
+    {
+        if ($id >= 0)
+        {
+            $this->id = $id;
+            $this->msg = 'select: ' . $this->data[$id];
+        }
+    }
+
+
+    public function say()
+    {
+        return $this->msg;
+    }
+
+
+    public function data(int $id)
+    {
+        return $this->data[$id];
+    }
+
+
+    public function alldata()
+    {
+        return $this->data;
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(int $id = -1)
+    {
+        $myservice = app()->makeWith('App\MyClasses\MyService', 
+            ['id' => $id]);
+        $data = [
+            'msg'=> $myservice->say($id),
+            'data'=> $myservice->alldata()
+        ];
+        return view('hello.index', $data);
+    }
