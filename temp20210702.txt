@@ -417,3 +417,15 @@ hello/index.blade.php
         @endforeach
         </ul>
     </body>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index()
+    {
+        $myservice = app('App\MyClasses\MyService'); // ☆
+        $data = [
+            'msg'=> $myservice->say(),
+            'data'=> $myservice->data()
+        ];
+        return view('hello.index', $data);
+    }
