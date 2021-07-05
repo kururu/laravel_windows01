@@ -1174,3 +1174,27 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+    public function index()
+    {
+        $data = ['msg' => '', 'data' => []];
+        $msg = 'get: ';
+        $result = [];
+        DB::table('people')->orderBy('age', 'asc')
+            ->chunk(2, function($items) use (&$msg, &$result)
+        {
+            foreach($items as $item)
+            {   
+                $msg .= $item->id . ':' . $item->name . ' ';
+                $result += array_merge($result, [$item]);
+                break;
+            }
+            return true;
+        });
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
