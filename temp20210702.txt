@@ -638,7 +638,7 @@ class HelloController extends Controller
 
 C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers\AppServiceProvider.php
 
-    app()->bind('App\MyClasses\MyService', 
+    app()->singleton('App\MyClasses\MyService', 
             function ($app) {
         $myservice = new MyService();
         $myservice->setId(0);
