@@ -2065,3 +2065,44 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
 
 php artisan queue:work --stop-when-empty --queue=odd
 php artisan queue:work --stop-when-empty --queue=even
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+use Illuminate\Support\Facades\Storage;
+
+public function index()
+{
+    $msg = 'show people record.';
+    $result = Person::get();
+    $data = [
+        'input' => '',
+        'msg' => $msg,
+        'data' => $result,
+    ];
+    return view('hello.index', $data);
+}
+    
+public function send(Request $request)
+{
+    $id = $request->input('id');
+    $person = Person::find($id);
+    
+    dispatch(function() use ($person)
+    {
+        Storage::append('person_access_log.txt', 
+            $person->all_data);
+    });
+    return redirect()->route('hello');
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+        <form action="/hello" method="post">
+            @csrf
+            ID: <input type="text" id="id" name="id">
+            <input type="submit">
+        </form>
+
+
+php artisan queue:work --stop-when-empty

@@ -18,8 +18,7 @@
         <div>
         <form action="/hello" method="post">
             <?php echo csrf_field(); ?>
-            <input type="text" id="find" name="find" 
-                value="<?php echo e($input); ?>">
+            ID: <input type="text" id="id" name="id">
             <input type="submit">
         </form>
         </div>

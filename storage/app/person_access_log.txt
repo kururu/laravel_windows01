@@ -1,0 +1,8 @@
+YAMADA-JIRO(34) [taro@yamada]
+YAMADA-TARO(36) [jiro@yamada]
+YAMADA-JIRO(34) [taro@yamada]
+YAMADA-TARO(36) [jiro@yamada]
+SATIKO(25) [satiko@sato]
+KENTA [+MYJOB](44) [kenta@saito]
+GONTA [+MYJOB](33) [gonta@ikeda]
+AAA(1234) [bbb@ccc]
