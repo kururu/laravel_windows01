@@ -1640,3 +1640,10 @@ index.blade.php
             </table>
         </div>
     </body>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app
+Person.php
+	public function getNameAttribute($value)
+	{
+	    return strtoupper($value);
+	}
