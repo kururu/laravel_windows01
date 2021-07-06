@@ -1508,3 +1508,23 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+    public function index(Request $request)
+    {
+        $msg = 'show people record.';
+        $even = Person::get()->filter(function($item)
+        {
+            return $item->id % 2 == 0;
+        });
+        $even2 = Person::get()->filter(function($item)
+        {
+            return $item->age % 2 == 0;
+        });
+        $result = $even->merge($even2);
+        
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
