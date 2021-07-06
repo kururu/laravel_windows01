@@ -4,18 +4,17 @@
         <meta charset="utf-8">
         <title>Index</title>
         <link href="/css/app.css"  rel="stylesheet">
-
     </head>
     <body>
         <h1>Hello/Index</h1>
         <p>{{$msg}}</p>
-        <table class="table table-striped">
+        <table class="table table-striped" border="0" style="border-collapse: collapse;">
         @foreach($data as $item)
         <tr>
-            <th>{{$item->id}}</th>
-            <td>{{$item->name}}</td>
-            <td>{{$item->mail}}</td> 
-            <td>{{$item->age}}</td>
+            <th class="bg-primary table-dark" style="width: 10%">{{$item->id}}</th>
+            <td style="width: 30%">{{$item->name}}</td>
+            <td style="width: 30%">{{$item->mail}}</td> 
+            <td style="width: 30%">{{$item->age}}</td>
         </tr>
         @endforeach
         </table>

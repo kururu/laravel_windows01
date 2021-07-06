@@ -4,18 +4,17 @@
         <meta charset="utf-8">
         <title>Index</title>
         <link href="/css/app.css"  rel="stylesheet">
-
     </head>
     <body>
         <h1>Hello/Index</h1>
         <p><?php echo e($msg); ?></p>
-        <table class="table table-striped">
+        <table class="table table-striped" border="0" style="border-collapse: collapse;">
         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <tr>
-            <th><?php echo e($item->id); ?></th>
-            <td><?php echo e($item->name); ?></td>
-            <td><?php echo e($item->mail); ?></td> 
-            <td><?php echo e($item->age); ?></td>
+            <th class="bg-primary table-dark" style="width: 10%"><?php echo e($item->id); ?></th>
+            <td style="width: 30%"><?php echo e($item->name); ?></td>
+            <td style="width: 30%"><?php echo e($item->mail); ?></td> 
+            <td style="width: 30%"><?php echo e($item->age); ?></td>
         </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
