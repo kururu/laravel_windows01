@@ -2106,3 +2106,16 @@ index.blade.php
 
 
 php artisan queue:work --stop-when-empty
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers
+EventServiceProvider.php
+    protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+        ],
+        'App\Events\PersonEvent' => [
+            'App\Listeners\PersonEventListener',
+        ],
+    ];
+
+php artisan event:generate
