@@ -23,9 +23,13 @@
         </form>
         </div>
         <hr>
+        <?php echo e($msg); ?>
+
         <table class="table table-striped" style="width: 500px;">
         <?php
 
+        print_r($data);
+/*
             $json_search = "$data";
             $array_search = json_decode( $json_search,true ) ;
             sort($array_search);
@@ -38,6 +42,7 @@
                 echo "<br>";
             }
             echo "<br>";
+            */
         ?>
         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <tr>

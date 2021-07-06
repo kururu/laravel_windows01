@@ -7,6 +7,7 @@ use App\Person;
 use App\Http\Pagination\MyPaginator;
 use App\Jobs\MyJob;
 use Illuminate\Support\Facades\Storage;
+use App\Events\PersonEvent;
 
 class HelloController extends Controller
 {
@@ -29,14 +30,16 @@ class HelloController extends Controller
         $id = $request->input('id');
         $person = Person::find($id);
         
-        dispatch(function() use ($person)
-        {
-            Storage::append('person_access_log.txt', 
-                $person->all_data);
-        });
-        return redirect()->route('hello');
-    }
+        event(new PersonEvent($person));
 
+
+        $data = [
+            'input' => '',
+            'msg' => 'id='. $id,
+            'data' => [$person],
+        ];
+        return view('hello.index', $data);
+    }
 
 }
 
