@@ -12,6 +12,7 @@ class HelloController extends Controller
 
     public function index()
     {
+        Person::get(['*'])->searchable();
         $msg = 'show people record.';
         $result = Person::get();
         

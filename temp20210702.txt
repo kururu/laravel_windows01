@@ -1820,3 +1820,34 @@ index.blade.php
     </div>
 </body>
 </html>
+
+composer require teamtnt/tntsearch
+composer require teamtnt/laravel-scout-tntsearch-driver
+composer update
+composer remove teamtnt/tntsearch
+composer require teamtnt/tntsearch:2.7.0
+composer require teamtnt/laravel-scout-tntsearch-driver:
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\config
+scout.php
+    'driver' => env('SCOUT_DRIVER', 'tntsearch'),
+
+    'tntsearch' => [
+        'storage' => storage_path(),
+    ],
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+Person::get(['*'])->searchable();
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app
+Person.php
+public function toSearchableArray()
+{
+    $array = $this->toArray();
+    $array['reverse'] = strrev($array['name']);
+
+
+    return $array;
+}

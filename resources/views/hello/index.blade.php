@@ -19,6 +19,11 @@
         <hr>
         <table class="table table-striped" style="width: 300px;">
         <?php
+
+        $aaa = "YAMADA-JIRO,YAMADA-TARO,SATIKO,KENTA,GONTA,AAA";
+        echo strrev($aaa);
+        echo "<br>";
+
             $json_search = "$data";
             $array_search = json_decode( $json_search,true ) ;
             sort($array_search);

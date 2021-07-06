@@ -60,6 +60,15 @@ class Person extends Model
 	    $this->attributes['age'] = $value[2];
 	}
 
+	public function toSearchableArray()
+	{
+	    $array = $this->toArray();
+	    $array['reverse'] = strrev($array['name']);
+
+
+	    return $array;
+	}
+
 }
 
 
