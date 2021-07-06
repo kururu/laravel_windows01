@@ -5,27 +5,40 @@
     <link href="/css/app.css"  rel="stylesheet">
 </head>
 <body>
-    <h1>Hello/Index</h1>
-   <p>{{$msg}}</p>
-    <div>
-    <form action="/hello" method="post">
-        @csrf
-        <input type="text" id="find" name="find" 
-            value="{{$input}}">
-        <input type="submit">
-    </form>
+    <div class="pl-3 pt-3">
+        <h1>Hello/Index</h1>
+        <p>{{$msg}}</p>
+        <div>
+        <form action="/hello" method="post">
+            @csrf
+            <input type="text" id="find" name="find" 
+                value="{{$input}}">
+            <input type="submit">
+        </form>
+        </div>
+        <hr>
+        <table class="table table-striped" style="width: 300px;">
+        <?php
+            $json_search = "$data";
+            $array_search = json_decode( $json_search,true ) ;
+            sort($array_search);
+
+            for($i = 0; $i < count($array_search); ++$i) {
+                echo $array_search[$i]['id']." : ";
+                echo $array_search[$i]['name']." : ";
+                echo $array_search[$i]['mail']." : ";
+                echo $array_search[$i]['age'];
+                echo "<br>";
+            }
+            echo "<br>";
+        ?>
+        @foreach($data as $item)
+        <tr>
+            <th class="bg-primary table-dark" style="width: 10%">{{$item->id}}</th>
+            <td>{{$item->all_data}}</td>
+        </tr>
+        @endforeach
+        </table>
     </div>
-    <hr>
-    <table border="1">
-    @foreach($data as $item)
-    <tr>
-        <th>{{$item->id}}</th>
-        <td>{{$item->all_data}}</td>
-    </tr>
-    @endforeach
-    </table>
-    <hr>
 </body>
-
-
 </html>

@@ -30,7 +30,6 @@ class HelloController extends Controller
         $msg = 'search: ' . $input;
         $result = Person::search($input)->get();
 
-
         $data = [
             'input' => $input,
             'msg' => $msg,

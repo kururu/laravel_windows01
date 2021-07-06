@@ -1784,3 +1784,39 @@ scout.php
         'id' => env('ALGOLIA_APP_ID', 'AVSVHDZUJH'),
         'secret' => env('ALGOLIA_SECRET', 'c5c0f96ba4d9e6d8356534242eecf8df'),
     ],
+
+php artisan scout:import "App\Person"
+php artisan scout:flush "App\Person"
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+<!doctype html>
+<html lang="ja">
+<head>
+    <title>Index</title>
+    <link href="/css/app.css"  rel="stylesheet">
+</head>
+<body>
+    <div class="pl-3 pt-3">
+        <h1>Hello/Index</h1>
+        <p>{{$msg}}</p>
+        <div>
+        <form action="/hello" method="post">
+            @csrf
+            <input type="text" id="find" name="find" 
+                value="{{$input}}">
+            <input type="submit">
+        </form>
+        </div>
+        <hr>
+        <table class="table table-striped" style="width: 300px;">
+        @foreach($data as $item)
+        <tr>
+            <th class="bg-primary table-dark" style="width: 10%">{{$item->id}}</th>
+            <td>{{$item->all_data}}</td>
+        </tr>
+        @endforeach
+        </table>
+    </div>
+</body>
+</html>
