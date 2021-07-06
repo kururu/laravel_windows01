@@ -15,8 +15,8 @@ class HelloController extends Controller
     {
         if ($person != null)
         {
-            //MyJob::dispatch($person);
-            MyJob::dispatch($person)->delay(now()->addMinutes(5));
+            $qname = $person->id % 2 == 0 ? 'even' : 'odd';
+            MyJob::dispatch($person)->onQueue($qname);
         }
         $msg = 'show people record.';
         $result = Person::get();
@@ -27,7 +27,6 @@ class HelloController extends Controller
         ];
         return view('hello.index', $data);
     }
-
 
     public function send(Request $request)
     {

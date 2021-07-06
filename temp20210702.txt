@@ -2041,3 +2041,27 @@ php artisan queue:work
 C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
 
 MyJob::dispatch($person)->delay(now()->addMinutes(5));
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(Person $person = null)
+    {
+        if ($person != null)
+        {
+            $qname = $person->id % 2 == 0 ? 'even' : 'odd';
+            MyJob::dispatch($person)->onQueue($qname);
+        }
+        $msg = 'show people record.';
+        $result = Person::get();
+        $data = [
+            'input' => '',
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
+
+
+php artisan queue:work --stop-when-empty --queue=odd
+php artisan queue:work --stop-when-empty --queue=even
