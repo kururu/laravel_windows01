@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '205c44c4cee6d5ab8f677d90457d5623fb81a3fd',
+        'reference' => '705684b39db92676d1a7d2c8bacc9d413283f315',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'algolia/algoliasearch-client-php' => array(
+            'pretty_version' => '3.0.2',
+            'version' => '3.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../algolia/algoliasearch-client-php',
+            'aliases' => array(),
+            'reference' => '421abbfb085c8ae74d298a6f259ebfd69897e625',
+            'dev_requirement' => false,
+        ),
         'asm89/stack-cors' => array(
             'pretty_version' => 'v2.0.3',
             'version' => '2.0.3.0',
@@ -400,7 +409,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '205c44c4cee6d5ab8f677d90457d5623fb81a3fd',
+            'reference' => '705684b39db92676d1a7d2c8bacc9d413283f315',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -411,6 +420,15 @@
             'aliases' => array(),
             'reference' => 'dc7a9ca301fc89e9eaa164d58eac39a39c2e93b0',
             'dev_requirement' => true,
+        ),
+        'laravel/scout' => array(
+            'pretty_version' => 'v9.2.1',
+            'version' => '9.2.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/scout',
+            'aliases' => array(),
+            'reference' => 'c3cc2cfb0dff7e543d7e14f9e82117bcdfe5dffa',
+            'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
             'pretty_version' => 'v2.6.1',

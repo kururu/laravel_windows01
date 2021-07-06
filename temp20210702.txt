@@ -1770,3 +1770,17 @@ index.blade.php
         </ul>
     </div>
 </body>
+
+
+composer require laravel/scout
+//composer require algolia/algoliasearch-client-php:^2.2
+composer require algolia/algoliasearch-client-php
+
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\config
+scout.php
+    'algolia' => [
+        'id' => env('ALGOLIA_APP_ID', 'AVSVHDZUJH'),
+        'secret' => env('ALGOLIA_SECRET', 'c5c0f96ba4d9e6d8356534242eecf8df'),
+    ],

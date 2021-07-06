@@ -3,37 +3,28 @@
 <head>
     <title>Index</title>
     <link href="/css/app.css"  rel="stylesheet">
-    <script>
-    function doAction(){
-        var id = document.querySelector('#id').value;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/hello/json/' + id, true);
-        xhr.responseType = 'json';
-        xhr.onload = function(e) {
-            if (this.status == 200) {
-                var result = this.response;
-                document.querySelector('#name').textContent = result.name;
-                document.querySelector('#mail').textContent = result.mail;
-                document.querySelector('#age').textContent = result.age;
-            }
-        };
-        xhr.send();
-    }
-    </script>
 </head>
 <body>
-    <div class="pl-3 pt-3">
-        <h1>Hello/Index</h1>
-        <div>
-            <input type="number" id="id" value="1">
-            <button onclick="doAction();">Click</button>
-        </div>
-        <ul>
-        <li id="name"></li>
-        <li id="mail"></li>
-        <li id="age"></li>
-        </ul>
+    <h1>Hello/Index</h1>
+   <p><?php echo e($msg); ?></p>
+    <div>
+    <form action="/hello" method="post">
+        <?php echo csrf_field(); ?>
+        <input type="text" id="find" name="find" 
+            value="<?php echo e($input); ?>">
+        <input type="submit">
+    </form>
     </div>
+    <hr>
+    <table border="1">
+    <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <tr>
+        <th><?php echo e($item->id); ?></th>
+        <td><?php echo e($item->all_data); ?></td>
+    </tr>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </table>
+    <hr>
 </body>
 
 

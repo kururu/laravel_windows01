@@ -10,47 +10,33 @@ class HelloController extends Controller
 {
 
 
-    public function index(Request $request)
+    public function index()
     {
         $msg = 'show people record.';
-        $re = Person::get();
-        $fields = Person::get()->fields();
+        $result = Person::get();
         
         $data = [
-            'msg' => implode(', ', $fields),
-            'data' => $re,
+            'input' => '',
+            'msg' => $msg,
+            'data' => $result,
         ];
         return view('hello.index', $data);
     }
 
-    public function save($id, $name)
-    {
-        $record = Person::find($id);
-        $record->name = $name;
-        $record->save();
-        return redirect()->route('hello');
-    }
 
-    public function other()
+    public function send(Request $request)
     {
-        
-        $person = new Person();
-        $person->all_data = ['aaa','bbb@ccc', 1234]; // ダミーデータ
-        $person->save();
-        
-        return redirect()->route('hello');
-    }
+        $input = $request->input('find');
+        $msg = 'search: ' . $input;
+        $result = Person::search($input)->get();
 
-    public function json($id = -1)
-    {
-        if ($id == -1)
-        {
-            return Person::get()->toJson();
-        }
-        else
-        {
-            return Person::find($id)->toJson();
-        }
+
+        $data = [
+            'input' => $input,
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
     }
 
 
