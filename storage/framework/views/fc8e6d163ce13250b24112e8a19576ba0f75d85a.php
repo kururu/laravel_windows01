@@ -24,7 +24,7 @@
         </form>
         </div>
         <hr>
-        <table class="table table-striped" style="width: 300px;">
+        <table class="table table-striped" style="width: 500px;">
         <?php
 
             $json_search = "$data";

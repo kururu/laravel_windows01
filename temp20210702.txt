@@ -1854,8 +1854,10 @@ public function toSearchableArray()
 
 php artisan make:job MyJob
 
-MyJob.php
+
 C:\xampp\htdocs\lara01_git\laravel_windows01\app\Jobs
+MyJob.php
+
     public function handle()
     {
         //
@@ -1875,3 +1877,153 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers
         });
 
     }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+use App\Jobs\MyJob;
+
+    public function index()
+    {
+        Person::get(['*'])->searchable();
+        MyJob::dispatch();
+        $msg = 'show people record.';
+        $result = Person::get();
+        
+        $data = [
+            'input' => '',
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+<!doctype html>
+<html lang="ja">
+<head>
+    <title>Index</title>
+    <link href="/css/app.css"  rel="stylesheet">
+    <style type="text/css">
+        .myjob{
+            color: #ffffff;
+            padding-left: 1rem;
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="pl-3 pt-3">
+        <h1>Hello/Index</h1>
+        <p>{{$msg}}</p>
+        <div>
+        <form action="/hello" method="post">
+            @csrf
+            <input type="text" id="find" name="find" 
+                value="{{$input}}">
+            <input type="submit">
+        </form>
+        </div>
+        <hr>
+        <table class="table table-striped" style="width: 300px;">
+        <?php
+
+            $json_search = "$data";
+            $array_search = json_decode( $json_search,true ) ;
+            sort($array_search);
+
+            for($i = 0; $i < count($array_search); ++$i) {
+                echo $array_search[$i]['id']." : ";
+                echo $array_search[$i]['name']." : ";
+                echo $array_search[$i]['mail']." : ";
+                echo $array_search[$i]['age'];
+                echo "<br>";
+            }
+            echo "<br>";
+        ?>
+        @foreach($data as $item)
+        <tr>
+            <th class="bg-primary table-dark" style="width: 10%">{{$item->id}}</th>
+            <td>{{$item->all_data}}</td>
+        </tr>
+        @endforeach
+        </table>
+    </div>
+</body>
+</html>
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Jobs
+MyJob.php
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use App\Person;
+
+class MyJob implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $person;
+
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct(Person $person)
+    {
+        $this->person = $person;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //
+        //echo '<p class="myjob">THIS IS MYJOB!</p>';
+        $sufix = ' [+MYJOB]';
+        if (strpos($this->person->name, $sufix))
+        {
+            $this->person->name = str_replace( $sufix, '', $this->person->name);
+        } else {
+            $this->person->name .= $sufix;
+        }
+        $this->person->save();
+
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(Person $person = null)
+    {
+        if ($person != null)
+        {
+            MyJob::dispatch($person);
+        }
+        $msg = 'show people record.';
+        $result = Person::get();
+        $data = [
+            'input' => '',
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
+Route::get('/hello', [HelloController::class, 'index']);
+Route::post('/hello', [HelloController::class, 'send']);
+Route::get('/hello/{person}', [HelloController::class, 'index']);
