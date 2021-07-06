@@ -24,10 +24,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hello', [HelloController::class, 'index']);
+Route::get('hello', [HelloController::class, 'index'])->name('hello');
 Route::get('hello/{id}', [HelloController::class, 'index']);
+Route::get('hello/{id}/{name}', [HelloController::class, 'save']);
+
 //Route::get('hello/{id}', [HelloController::class, 'index'])->middleware('MyMW');
 //Route::get('hello', [HelloController::class, 'index'])->middleware('MyMW');
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1647,3 +1647,36 @@ Person.php
 	{
 	    return strtoupper($value);
 	}
+
+	public function setNameAttribute($value)
+	{
+	    $this->attributes['name'] = strtoupper($value);
+	}
+
+
+	protected $guarded = ['id'];
+
+	public static $rules = [
+	    'name' => 'required',
+	    'mail' => 'email',
+	    'age' => 'integer',
+	];
+
+
+
+    public function save($id, $name)
+    {
+        $record = Person::find($id);
+        $record->name = $name;
+        $record->save();
+        return redirect()->route('hello');
+    }
+
+MYSQLにupdated_atカラム追加
+ALTER TABLE people ADD updated_at varchar(255)
+ALTER TABLE people ADD created_at varchar(255)
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
+Route::get('hello', [HelloController::class, 'index'])->name('hello');
+Route::get('hello/{id}', [HelloController::class, 'index']);
+Route::get('hello/{id}/{name}', [HelloController::class, 'save']);
