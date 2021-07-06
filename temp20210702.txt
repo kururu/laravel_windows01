@@ -2027,3 +2027,17 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
 Route::get('/hello', [HelloController::class, 'index']);
 Route::post('/hello', [HelloController::class, 'send']);
 Route::get('/hello/{person}', [HelloController::class, 'index']);
+
+php artisan queue:table
+php artisan migrate
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+.env
+QUEUE_CONNECTION=database
+QUEUE_DRIVER=database
+
+php artisan queue:work
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+MyJob::dispatch($person)->delay(now()->addMinutes(5));
