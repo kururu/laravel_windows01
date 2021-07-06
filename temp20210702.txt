@@ -1853,3 +1853,25 @@ public function toSearchableArray()
 }
 
 php artisan make:job MyJob
+
+MyJob.php
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Jobs
+    public function handle()
+    {
+        //
+        echo '<p class="myjob">THIS IS MYJOB!</p>';
+    }
+
+php artisan make:provider MyJobProvider
+MyJobProvider.php
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers
+    public function register()
+    {
+        //
+        $this->app->bindMethod(MyJob::class.'@handle', 
+                function($job, $app)
+        {
+            return $job->handle();
+        });
+
+    }

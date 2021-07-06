@@ -3,6 +3,13 @@
 <head>
     <title>Index</title>
     <link href="/css/app.css"  rel="stylesheet">
+    <style type="text/css">
+        .myjob{
+            color: #ffffff;
+            padding-left: 1rem;
+            background-color: #666;
+        }
+    </style>
 </head>
 <body>
     <div class="pl-3 pt-3">
@@ -19,10 +26,6 @@
         <hr>
         <table class="table table-striped" style="width: 300px;">
         <?php
-
-        $aaa = "YAMADA-JIRO,YAMADA-TARO,SATIKO,KENTA,GONTA,AAA";
-        echo strrev($aaa);
-        echo "<br>";
 
             $json_search = "$data";
             $array_search = json_decode( $json_search,true ) ;
