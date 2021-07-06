@@ -1547,3 +1547,96 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+
+<?php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model; 
+use Illuminate\Database\Eloquent\Collection;
+
+class Person extends Model
+{
+    public function newCollection(array $models = [])
+    {
+        return new MyCollection($models);
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app
+Person.php
+class MyCollection extends Collection
+{
+    public function fields()
+    {
+        $item = $this->first();
+        return array_keys($item->toArray());
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function index(Request $request)
+    {
+        $msg = 'show people record.';
+        $re = Person::get();
+        $fields = Person::get()->fields();
+        
+        $data = [
+            'msg' => implode(', ', $fields),
+            'data' => $re,
+        ];
+        return view('hello.index', $data);
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app
+Person.php
+class Person extends Model
+{
+    public function newCollection(array $models = [])
+    {
+        return new MyCollection($models);
+    }
+
+    public function getNameAndIdAttribute()
+	{
+	    return $this->name . ' [id=' . $this->id . ']';
+	}
+
+
+	public function getNameAndMailAttribute()
+	{
+	    return $this->name . ' (' . $this->mail . ')';
+	}
+
+
+	public function getNameAndAgeAttribute()
+	{
+	    return $this->name . '(' . $this->age . ')';
+	}
+	public function getAllDataAttribute()
+	{
+	    return $this->name . '(' . $this->age . ')'
+	        . ' [' . $this->mail . ']';
+	}
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+
+
+    <body>
+        <div class="container pt-3">
+            <h1>Hello/Index</h1>
+            <p>{{$msg}}</p>
+            <table class="table table-striped" border="0" style="border-collapse: collapse;">
+            @foreach($data as $item)
+            <tr>
+                <th class="bg-primary table-dark" style="width: 10%">{{$item->id}}</th>
+                <td style="width: 90%">{{$item->name_and_age}}</td>
+            </tr>
+            @endforeach
+            </table>
+        </div>
+    </body>
