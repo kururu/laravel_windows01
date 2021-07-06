@@ -13,23 +13,20 @@ class HelloController extends Controller
     public function index(Request $request)
     {
         $msg = 'show people record.';
-        $result = Person::get()->filter(function($person)
-        {
-            return $person->age < 50;
-        });
-        $result2 = Person::get()->filter(function($person)
-        {
-            return $person->age < 30;
-        });
-        $result3 = $result->diff($result2);
-
-
+        $keys = Person::get()->modelKeys();
+        $even = array_filter($keys, function($key)
+            {
+                return $key % 2 == 0;
+            });
+        $result = Person::get()->only($even);
+        
         $data = [
             'msg' => $msg,
-            'data' => $result3,
+            'data' => $result,
         ];
         return view('hello.index', $data);
     }
+
 
 
 }
