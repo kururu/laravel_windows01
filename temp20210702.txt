@@ -2204,3 +2204,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class PersonEventListener implements ShouldQueue
 
 php artisan queue:work --stop-when-empty
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+mycmd.bat
+echo [%date% %time%] This is MyCmd.bat. >> mycmd_log.txt
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Console
+Kernel.php
+    protected function schedule(Schedule $schedule)
+    {
+        // $schedule->command('inspire')->hourly();
+        $schedule->exec('mycmd');
+    }
+
+php artisan schedule:run
