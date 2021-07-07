@@ -29,62 +29,31 @@
         <?php
 
         echo $msg;
-        //print_r($data[0]);
+        print_r($data[0]);
 
         echo "<br>";
         echo "要素の数: ".count($data);
         echo "<br>";
 
-        $data01 = array_msort($data, array('id'=>SORT_DESC));
-
-        //print_r($data01[0]);
+        $data01 = $data;
+        $data02 = array();
 
         foreach($data01 as $item){
-            echo $item->id;
-            echo $item->all_data;
-            echo "<br>";
+            //echo $item->id;
+            //echo $item->all_data;
+            //echo "<br>";
+            $data02[$item->id]['id'] = $item->id;
+            $data02[$item->id]['name'] = $item->name;
         }
         echo "<br>";
 
-        //https://www.php.net/manual/ja/function.array-multisort.php
-        function array_msort($array, $cols)
-        {
-            $colarr = array();
-            foreach ($cols as $col => $order) {
-                $colarr[$col] = array();
-                foreach ($array as $k => $row) { $colarr[$col]['_'.$k] = strtolower($row[$col]); }
-            }
-            $eval = 'array_multisort(';
-            foreach ($cols as $col => $order) {
-                $eval .= '$colarr[\''.$col.'\'],'.$order.',';
-            }
-            $eval = substr($eval,0,-1).');';
-            eval($eval);
-            $ret = array();
-            foreach ($colarr as $col => $arr) {
-                foreach ($arr as $k => $v) {
-                    $k = substr($k,1);
-                    if (!isset($ret[$k])) $ret[$k] = $array[$k];
-                    $ret[$k][$col] = $array[$k][$col];
-                }
-            }
-            return $ret;
+        print_r($data02);
 
+        foreach ($data02 as $key => $value) {
+            $sort[$key] = $value['id'];
         }
-        /*
-            $json_search = "$data";
-            $array_search = json_decode( $json_search,true ) ;
-            sort($array_search);
+        array_multisort($sort, SORT_DESC, $data02);
 
-            for($i = 0; $i < count($array_search); ++$i) {
-                echo $array_search[$i]['id']." : ";
-                echo $array_search[$i]['name']." : ";
-                echo $array_search[$i]['mail']." : ";
-                echo $array_search[$i]['age'];
-                echo "<br>";
-            }
-            echo "<br>";
-            */
         ?>
         <table class="table table-striped" style="width: 500px;">
         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -95,10 +64,10 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
         <table class="table table-striped pt-3" style="width: 500px;">
-        <?php $__currentLoopData = $data01; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php $__currentLoopData = $data02; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <tr>
-            <th class="bg-primary table-dark" style="width: 10%"><?php echo e($item->id); ?></th>
-            <td><?php echo e($item->all_data); ?></td>
+            <th class="bg-primary table-dark" style="width: 10%"><?php echo e($item['id']); ?></th>
+            <td><?php echo e($item['name']); ?></td>
         </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
