@@ -30,17 +30,11 @@ class Kernel extends ConsoleKernel
     {
         $count = Person::all()->count();
         $id = rand(0, $count) + 1;
-
-
-        /* インスタンス実行 */
-        $schedule->call(new MyJob($id));
-        
-        /* ディスパッチする*/
-        $schedule->call(function() use($id)
-        {
-            MyJob::dispatch($id);
-        }); 
+        $schedule->job(new MyJob($id));
+        /* 溜まったキューを実行 */
+        //$schedule->command('queue:work --stop-when-empty');
     }
+
 
     /**
      * Register the commands for the application.

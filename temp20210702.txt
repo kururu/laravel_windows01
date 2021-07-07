@@ -2399,3 +2399,13 @@ class MyJob implements ShouldQueue
             MyJob::dispatch($id);
         }); 
     }
+
+    protected function schedule(Schedule $schedule)
+    {
+        $count = Person::all()->count();
+        $id = rand(0, $count) + 1;
+        $schedule->job(new MyJob($id));
+    }
+
+php artisan schedule:run
+php artisan queue:work --stop-when-empty
