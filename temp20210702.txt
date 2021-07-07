@@ -2246,3 +2246,156 @@ use App\Jobs\MyJob;
 
 php artisan schedule:run
 php artisan queue:work --stop-when-empty
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Console
+Kernel.php
+<?php
+
+namespace App\Console;
+
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+use App\Person;
+use App\Jobs\MyJob;
+use Illuminate\Support\Facades\Storage;
+
+class Kernel extends ConsoleKernel
+{
+    /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        //
+    ];
+
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function schedule(Schedule $schedule)
+    {
+        $count = Person::all()->count();
+        $id = rand(0, $count) + 1;
+        $obj = new ScheduleObj($id);
+        $schedule->call($obj);
+    }
+
+    /**
+     * Register the commands for the application.
+     *
+     * @return void
+     */
+    protected function commands()
+    {
+        $this->load(__DIR__.'/Commands');
+
+        require base_path('routes/console.php');
+    }
+}
+
+
+class ScheduleObj
+{
+    private $person;
+
+
+    public function __construct($id)
+    {
+        $this->person = Person::find($id);
+    }
+
+
+    public function __invoke()
+    {
+        Storage::append('person_access_log.txt', 
+            $this->person->all_data);
+        MyJob::dispatch($this->person);
+        return 'true';
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Jobs
+MyJob.php
+<?php
+
+namespace App\Jobs;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use App\Person;
+use Illuminate\Support\Facades\Storage;
+
+class MyJob implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+
+    protected $person;
+
+
+    public function getPersonId()
+    {
+        return $this->person->id;
+    }
+    
+    public function __construct($id)
+    {
+        $this->person = Person::find($id)->first();
+    }
+
+
+    public function __invoke()
+    {
+        $this->handle();
+    }
+
+
+    public function handle()
+    {
+        $this->doJob();
+    }
+    
+    public function doJob()
+    {
+        $sufix = ' [+MYJOB]';
+        if (strpos($this->person->name, $sufix))
+        {
+            $this->person->name = str_replace( $sufix, '', $this->person->name);
+        } else {
+            $this->person->name .= $sufix;
+        }
+        $this->person->save();
+
+
+        Storage::append('person_access_log.txt', 
+            $this->person->all_data);
+    }
+}
+
+
+
+    protected function schedule(Schedule $schedule)
+    {
+        $count = Person::all()->count();
+        $id = rand(0, $count) + 1;
+
+
+        /* インスタンス実行 */
+        $schedule->call(new MyJob($id));
+        
+        /* ディスパッチする*/
+        $schedule->call(function() use($id)
+        {
+            MyJob::dispatch($id);
+        }); 
+    }

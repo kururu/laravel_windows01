@@ -9,32 +9,40 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Person;
+use Illuminate\Support\Facades\Storage;
 
 class MyJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
     protected $person;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(Person $person)
+
+    public function getPersonId()
     {
-        $this->person = $person;
+        return $this->person->id;
+    }
+    
+    public function __construct($id)
+    {
+        $this->person = Person::find($id)->first();
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+
+    public function __invoke()
+    {
+        $this->handle();
+    }
+
+
     public function handle()
     {
-        //
-        //echo '<p class="myjob">THIS IS MYJOB!</p>';
+        $this->doJob();
+    }
+    
+    public function doJob()
+    {
         $sufix = ' [+MYJOB]';
         if (strpos($this->person->name, $sufix))
         {
@@ -44,5 +52,8 @@ class MyJob implements ShouldQueue
         }
         $this->person->save();
 
+
+        Storage::append('person_access_log.txt', 
+            $this->person->all_data);
     }
 }
