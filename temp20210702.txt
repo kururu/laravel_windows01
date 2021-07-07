@@ -2189,3 +2189,18 @@ EventServiceProvider.php
     protected $subscribe = [
         'App\Listeners\MyEventSubscriber',
     ];
+
+
+    public function shouldDiscoverEvents()
+    {
+        return true;
+    }
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Listeners
+PersonEventListener.php
+use Illuminate\Contracts\Queue\ShouldQueue;
+↑はすでに記述があった。
+class PersonEventListener implements ShouldQueue
+
+php artisan queue:work --stop-when-empty
