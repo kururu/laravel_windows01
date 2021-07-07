@@ -2531,3 +2531,45 @@ C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloControlle
         ];
         return view('hello.index', $data);
     }
+
+
+<template>
+    <div class="container">
+        <p>{{msg}}</p>
+        <hr>
+        <input type="text" v-model="name">
+        <button v-on:click="doAction">click</button>
+    </div>
+</template>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\js\components
+MyComponent.vue
+<script>
+export default {
+    data:function(){
+        return {
+            msg:'please your name:',
+            name:'',
+        };
+    },
+    methods:{
+        doAction:function(){
+            this.msg = 'Hello, ' + this.name + '!!';
+        }
+    }
+}
+</script>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\js
+app.js
+Vue.component('my-component', require('./components/MyComponent.vue').default);
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+
+    <div id="app">
+        <example-component></example-component>
+        <my-component></my-component>
+    </div>
+
+npm run dev
