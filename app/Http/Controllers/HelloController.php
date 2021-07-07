@@ -8,12 +8,13 @@ use App\Http\Pagination\MyPaginator;
 use App\Jobs\MyJob;
 use Illuminate\Support\Facades\Storage;
 use App\Events\PersonEvent;
+use App\MyClasses\PowerMyService;
 
 class HelloController extends Controller
 {
 
 
-    public function index()
+    public function index(PowerMyService $service)
     {
         $data = [
             'msg' => 'This is Angular application.',

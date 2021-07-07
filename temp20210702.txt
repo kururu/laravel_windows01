@@ -2893,7 +2893,8 @@ index.blade.php
 
 
 C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
-
+use App\MyClasses\PowerMyService;
+// PowerMyServiceをどこで使っているかわからない
     public function index(PowerMyService $service)
     {
         $data = [
