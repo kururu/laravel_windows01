@@ -2177,3 +2177,15 @@ use App\Events\PersonEvent;
         ];
         return view('hello.index', $data);
     }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Providers
+EventServiceProvider.php
+    protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+        ],
+    ];
+
+    protected $subscribe = [
+        'App\Listeners\MyEventSubscriber',
+    ];
