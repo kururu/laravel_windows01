@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
             $person = Person::find($id);
             MyJob::dispatch($person);
         });
-        //$schedule->command('queue:work --stop-when-empty');
+        $schedule->command('queue:work --stop-when-empty');
     }
 
     /**
