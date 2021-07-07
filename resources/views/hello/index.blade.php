@@ -2,20 +2,17 @@
 <html lang="ja">
 <head>
     <title>Index</title>
-    <link href="{{ mix('css/app.css') }}" 
-        rel="stylesheet" type="text/css">
+    <link href="{{mix('/css/app.css')}}" 
+            rel="stylesheet" type="text/css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body style="padding:10px;">
-    <h1>Hello/Index</h1>
+    <h1 style="padding-top:60px;">Hello/Index</h1>
     <p>{{$msg}}</p>
 
 
-    <div id="example"></div>
-    <div id="mycomponent" style="padding-top: 10px;"></div>
+    <app-root></app-root>
     
-    <script src="{{asset('/js/app.js')}}"></script>
+    <script src="{{mix('/js/app.js')}}"></script>
 </body>
-
-
 </html> 
