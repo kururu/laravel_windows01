@@ -2409,3 +2409,104 @@ class MyJob implements ShouldQueue
 
 php artisan schedule:run
 php artisan queue:work --stop-when-empty
+
+npm install
+npm run dev
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+package.json
+{
+    "private": true,
+    "scripts": {
+        ……略……
+    },
+    "devDependencies": {
+        "axios": "^0.18",
+        "bootstrap": "^4.0.0",
+        "cross-env": "^5.1",
+        "jquery": "^3.2",
+        "laravel-mix": "^4.0.7",
+        "lodash": "^4.17.5",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.15.2",
+        "sass-loader": "^7.1.0",
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.10"
+    }
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\js
+app.js
+require('./bootstrap');
+
+window.Vue = require('vue');
+
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+const app = new Vue({
+    el: '#app',
+});
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+webpack.mix.js
+mix.js('resources/js/app.js', 'public/js').vue() //vueを追記
+    .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps();
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+<!doctype html>
+<html lang="ja">
+<head>
+    <title>Index</title>
+    <link href="{{ mix('css/app.css') }}" 
+        rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body style="padding:10px;">
+    <h1>Hello/Index</h1>
+    <p>{{$msg}}</p>
+
+
+    <div id="app">
+        <example-component></example-component>
+    </div>
+    <script src="{{ mix('js/app.js') }}"></script>
+
+
+</body>
+
+</html>
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+package.json
+    "devDependencies": {
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.16.1",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1"
+    }
+
+npm uninstall vue
+npm uninstall vue-loader
+npm uninstall vue-template-compiler
+
+php artisan ui vue --auth
+php artisan ui vue
+npm install
+npm run dev
+
+https://mebee.info/2019/11/14/post-3986/
+Laravel6でvue.jsを利用する(Laravel Framework 8.49.1で読み替え)
+
+npm run dev
+php artisan -V
+Laravel Framework 8.49.1

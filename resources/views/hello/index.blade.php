@@ -2,7 +2,9 @@
 <html lang="ja">
 <head>
     <title>Index</title>
-    <link href="/css/app.css"  rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" 
+        rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style type="text/css">
         .myjob{
             color: #ffffff;
@@ -22,12 +24,8 @@
             <input type="submit">
         </form>
         </div>
-        <hr>
-        {{$msg}}
-        
+        <hr>        
         <?php
-
-        echo $msg;
         print_r($data[0]);
 
         echo "<br>";
@@ -71,5 +69,13 @@
         @endforeach
         </table>
     </div>
+
+
+    <div id="app">
+        <example-component></example-component>
+    </div>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <br>
+    <br>
 </body>
 </html>

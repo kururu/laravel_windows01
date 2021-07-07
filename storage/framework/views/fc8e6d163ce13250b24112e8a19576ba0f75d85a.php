@@ -2,7 +2,9 @@
 <html lang="ja">
 <head>
     <title>Index</title>
-    <link href="/css/app.css"  rel="stylesheet">
+    <link href="<?php echo e(mix('css/app.css')); ?>" 
+        rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <style type="text/css">
         .myjob{
             color: #ffffff;
@@ -22,13 +24,8 @@
             <input type="submit">
         </form>
         </div>
-        <hr>
-        <?php echo e($msg); ?>
-
-        
+        <hr>        
         <?php
-
-        echo $msg;
         print_r($data[0]);
 
         echo "<br>";
@@ -72,5 +69,13 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </table>
     </div>
+
+
+    <div id="app">
+        <example-component></example-component>
+    </div>
+    <script src="<?php echo e(mix('js/app.js')); ?>"></script>
+    <br>
+    <br>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views/hello/index.blade.php ENDPATH**/ ?>
