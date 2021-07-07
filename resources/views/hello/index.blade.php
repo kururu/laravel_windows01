@@ -12,6 +12,7 @@
 
 
     <div id="example"></div>
+    <div id="mycomponent" style="padding-top: 10px;"></div>
     
     <script src="{{asset('/js/app.js')}}"></script>
 </body>
