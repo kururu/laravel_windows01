@@ -11,14 +11,9 @@
     <p><?php echo e($msg); ?></p>
 
 
-    <div id="app">
-        <example-component></example-component>
-        <my-component></my-component>
-    </div>
-
-    <script src="<?php echo e(mix('js/app.js')); ?>"></script>
-
-
+    <div id="example"></div>
+    
+    <script src="<?php echo e(asset('/js/app.js')); ?>"></script>
 </body>
 
 
