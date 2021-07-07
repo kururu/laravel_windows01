@@ -2573,3 +2573,69 @@ index.blade.php
     </div>
 
 npm run dev
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+    public function json($id = -1)
+    {
+        if ($id == -1)
+        {
+            return Person::get()->toJson();
+        }
+        else
+        {
+            return Person::find($id)->toJson();
+        }
+    }
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\routes\web.php
+Route::get('/hello', [HelloController::class, 'index']);
+Route::post('/hello', [HelloController::class, 'send']);
+
+Route::get('/hello/json', [HelloController::class, 'json']);
+Route::get('/hello/json/{id}', [HelloController::class, 'json']);
+
+npm run dev
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\js\components
+MyComponent.vue
+<template>
+    <div class="container">
+        <p>{{msg}}</p>
+        <hr>
+        <ul>
+            <li v-for="(person,key) in people">
+                {{person.id}}: {{person.name}} [{{person.mail}}] ({{person.age}})
+            </li>
+        </ul>
+    </div>
+</template>
+
+
+<script>
+const axios = require('axios');
+
+
+export default {
+    mounted () {
+        axios.get('/hello/json')
+            .then(response =>{
+                this.people = response.data;
+                this.msg = 'get data!';
+            });
+    },
+    data:function(){
+        return {
+            msg:'wait...',
+            name:'',
+            people:[],
+        };
+    },
+    methods:{
+        doAction:function(){
+            this.msg = 'Hello, ' + this.name + '!!';
+        }
+    },
+}
+</script>
