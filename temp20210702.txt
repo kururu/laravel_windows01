@@ -2219,3 +2219,11 @@ Kernel.php
     }
 
 php artisan schedule:run
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Console
+Kernel.php
+    protected function schedule(Schedule $schedule)
+    {
+        // $schedule->command('inspire')->hourly();
+        $schedule->command('queue:work --stop-when-empty');
+    }
