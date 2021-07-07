@@ -2009,6 +2009,7 @@ var MyComponent = /*#__PURE__*/function (_Component) {
       msg: 'ok'
     };
     _this.doChange = _this.doChange.bind(_assertThisInitialized(_this));
+    _this.doAction = _this.doAction.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2019,8 +2020,30 @@ var MyComponent = /*#__PURE__*/function (_Component) {
       this.setState(function (state) {
         return {
           num: n,
-          msg: 'count: ' + n
+          person: null
         };
+      });
+    }
+  }, {
+    key: "doAction",
+    value: function doAction(event) {
+      var _this2 = this;
+
+      this.setState(function (state) {
+        return {
+          msg: 'wait...'
+        };
+      });
+      axios.get('/hello/json/' + this.state.num).then(function (response) {
+        var person = response.data;
+        var msg = person.id + ':' + person.name + ' [' + person.mail + '] (' + person.age + ')';
+
+        _this2.setState(function (state) {
+          return {
+            person: person,
+            msg: msg
+          };
+        });
       });
     }
   }, {
@@ -2030,12 +2053,15 @@ var MyComponent = /*#__PURE__*/function (_Component) {
         className: "container",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
           children: this.state.msg
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
             type: "number",
             id: "num",
             onChange: this.doChange
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            onClick: this.doAction,
+            children: "Click"
+          })]
         })]
       });
     }

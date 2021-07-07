@@ -12,6 +12,7 @@ export default class MyComponent extends Component {
             msg:'ok',
         };
         this.doChange = this.doChange.bind(this);
+        this.doAction = this.doAction.bind(this);
     }
 
 
@@ -19,8 +20,26 @@ export default class MyComponent extends Component {
         let n = event.target.value;
         this.setState((state)=>({
             num: n,
-            msg: 'count: ' + n,
+            person:null,
         }));
+    }
+    doAction(event) {
+        this.setState((state)=>({
+            msg:'wait...',
+        }));
+        axios.get('/hello/json/' + this.state.num)
+            .then(response =>{
+                let person = response.data;
+                let msg = person.id + ':' + person.name
+                    + ' [' + person.mail + '] ('
+                    + person.age + ')';
+                this.setState((state)=>({
+                    person:person,
+                    msg:msg
+                }));
+            });
+
+
     }
 
 
@@ -31,6 +50,7 @@ export default class MyComponent extends Component {
                 <div>
                     <input type="number" id="num"
                         onChange={this.doChange} />
+                    <button onClick={this.doAction}>Click</button>
                 </div>
             </div>
         );
@@ -41,4 +61,3 @@ export default class MyComponent extends Component {
 if (document.getElementById('mycomponent')) {
     ReactDOM.render(<MyComponent />, document.getElementById('mycomponent'));
 }
-
