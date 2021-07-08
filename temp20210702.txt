@@ -2903,3 +2903,103 @@ use App\MyClasses\PowerMyService;
         return view('hello.index', $data);
     }
  
+
+ng generate component my
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp\src\app
+app.module.ts
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+//import { AppComponent } from './app.component';
+import { MyComponent } from './my/my.component';
+
+@NgModule({
+  declarations: [
+    //AppComponent,
+    MyComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [],
+  bootstrap: [MyComponent]
+})
+export class AppModule { }
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp\src\app\my
+my.component.html
+<div>
+  <p>{{message}}</p>
+  <input type="text" [formControl]="input" />
+  <button (click)="doAction()">Click</button>
+</div>
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp\src\app\my
+my.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-my',
+  templateUrl: './my.component.html',
+  styleUrls: ['./my.component.css']
+})
+export class MyComponent implements OnInit {
+
+  message:string;
+  input:FormControl;
+
+
+  constructor() { }
+
+
+  ngOnInit() {
+    this.message = 'please input your name:';
+    this.input = new FormControl('noname');
+  }
+
+
+  doAction() {
+    this.message = 'Hello, ' + this.input.value + '!!';
+  }
+
+}
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp
+tsconfig.json
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "strictPropertyInitialization": false
+  }
+
+https://tech-up.hatenablog.com/entry/2019/03/15/152258
+エラー解消法_Property '…' has no initializer and is not definitely assigned in the constructor
+
+cd C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp
+ng build
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+webpack.mix.js
+mix.js([
+   'resources/ngapp/dist/ngapp/runtime.bbfb57b8daa2fca80e25.js',
+   //'resources/ngapp/dist/ngapp/vendor.js',
+   'resources/ngapp/dist/ngapp/styles.31d6cfe0d16ae931b73c.css',
+   'resources/ngapp/dist/ngapp/polyfills.9cecb7ad41f1b7dfcce5.js',
+   'resources/ngapp/dist/ngapp/main.ae607e80ae94e30839db.js' //ここの乱数変わる
+ ], 'public/js/app.js');
+
+
+cd C:\xampp\htdocs\lara01_git\laravel_windows01
+npm run dev

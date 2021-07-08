@@ -16,7 +16,7 @@ mix.js([
    //'resources/ngapp/dist/ngapp/vendor.js',
    'resources/ngapp/dist/ngapp/styles.31d6cfe0d16ae931b73c.css',
    'resources/ngapp/dist/ngapp/polyfills.9cecb7ad41f1b7dfcce5.js',
-   'resources/ngapp/dist/ngapp/main.89881a79dd5b779099e1.js'
+   'resources/ngapp/dist/ngapp/main.ae607e80ae94e30839db.js'
  ], 'public/js/app.js');
 
 
