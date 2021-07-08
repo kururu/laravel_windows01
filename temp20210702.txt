@@ -3066,3 +3066,8 @@ mix.js([
 
 cd C:\xampp\htdocs\lara01_git\laravel_windows01
 npm run dev
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\app\Http\Controllers\HelloController.php
+
+//use App\MyClasses\PowerMyService;
+public function index()
