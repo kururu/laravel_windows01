@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import axios from 'axios';
+
 
 @Component({
   selector: 'app-my',
@@ -7,6 +9,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./my.component.css']
 })
 export class MyComponent implements OnInit {
+
 
   message:string;
   input:FormControl;
@@ -22,7 +25,13 @@ export class MyComponent implements OnInit {
 
 
   doAction() {
-    this.message = 'Hello, ' + this.input.value + '!!';
+    axios.get('/hello/json/' + this.input.value)
+      .then(response =>{
+          let person = response.data;
+          let msg = person.id + ':' + person.name
+              + ' [' + person.mail + '] ('
+              + person.age + ')';
+          this.message = msg;
+      });
   }
-
 }

@@ -10,7 +10,6 @@
     <h1>Hello/Index</h1>
     <p><?php echo e($msg); ?></p>
 
-
     <app-my></app-my>
     
     <script src="<?php echo e(mix('/js/app.js')); ?>"></script>

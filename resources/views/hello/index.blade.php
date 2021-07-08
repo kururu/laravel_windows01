@@ -10,7 +10,6 @@
     <h1>Hello/Index</h1>
     <p>{{$msg}}</p>
 
-
     <app-my></app-my>
     
     <script src="{{mix('/js/app.js')}}"></script>

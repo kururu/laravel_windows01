@@ -2974,6 +2974,11 @@ export class MyComponent implements OnInit {
 
 }
 
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\views\hello
+index.blade.php
+<app-my></app-my>
+
+
 C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp
 tsconfig.json
   "angularCompilerOptions": {
@@ -2998,6 +3003,64 @@ mix.js([
    'resources/ngapp/dist/ngapp/styles.31d6cfe0d16ae931b73c.css',
    'resources/ngapp/dist/ngapp/polyfills.9cecb7ad41f1b7dfcce5.js',
    'resources/ngapp/dist/ngapp/main.ae607e80ae94e30839db.js' //ここの乱数変わる
+ ], 'public/js/app.js');
+
+
+cd C:\xampp\htdocs\lara01_git\laravel_windows01
+npm run dev
+
+
+C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp\src\app\my
+my.component.ts
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import axios from 'axios';
+
+
+@Component({
+  selector: 'app-my',
+  templateUrl: './my.component.html',
+  styleUrls: ['./my.component.css']
+})
+export class MyComponent implements OnInit {
+
+
+  message:string;
+  input:FormControl;
+
+
+  constructor() { }
+
+
+  ngOnInit() {
+    this.message = 'please input your name:';
+    this.input = new FormControl('noname');
+  }
+
+
+  doAction() {
+    axios.get('/hello/json/' + this.input.value)
+      .then(response =>{
+          let person = response.data;
+          let msg = person.id + ':' + person.name
+              + ' [' + person.mail + '] ('
+              + person.age + ')';
+          this.message = msg;
+      });
+  }
+}
+
+cd C:\xampp\htdocs\lara01_git\laravel_windows01\resources\ngapp
+ng build
+
+C:\xampp\htdocs\lara01_git\laravel_windows01
+webpack.mix.js
+mix.js([
+   'resources/ngapp/dist/ngapp/runtime.bbfb57b8daa2fca80e25.js',
+   //'resources/ngapp/dist/ngapp/vendor.js',
+   'resources/ngapp/dist/ngapp/styles.31d6cfe0d16ae931b73c.css',
+   'resources/ngapp/dist/ngapp/polyfills.9cecb7ad41f1b7dfcce5.js',
+   'resources/ngapp/dist/ngapp/main.55338b7bf76bf7d39f83.js' //ここの乱数変わる
  ], 'public/js/app.js');
 
 
